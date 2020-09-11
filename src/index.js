@@ -203,7 +203,9 @@ function getRes(res) {
 function animPath(path) {
   for (let i = 0; i < path.length; i++) {
     setTimeout(function () {
-      $(path[i]).removeClass("visited").addClass("active");
+      $(path[i])
+        .removeClass("visited")
+        .addClass("active", 1000, "easeOutBounce");
     }, i * 20);
   }
 }
