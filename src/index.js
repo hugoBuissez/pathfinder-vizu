@@ -1,3 +1,7 @@
+/* THE PATHFIDING JS FILE
+ * AUTHOR @hugoBuissez
+ */
+
 $(document).ready(function () {
   createBoard();
   $("table").click(function (event) {
@@ -17,6 +21,8 @@ $(document).ready(function () {
   });
 });
 
+// This function creates the board
+// For the moment, no choice on the size
 function createBoard() {
   var id = 0;
   for (let index = 0; index < 20; index++) {
@@ -28,9 +34,11 @@ function createBoard() {
       id++;
     }
     $("tbody").append(row);
+    $("#res").css("visibility", "hidden");
   }
 }
 
+// Reset the board
 function clearBoard() {
   $(".visited").removeClass("visited");
   $(".startNode").removeClass("startNode");
@@ -40,6 +48,8 @@ function clearBoard() {
   $("#res").css("visibility", "hidden");
 }
 
+// Hook for the click event
+// Adding color on the board corresponding to the node's role
 function clickHandler(event) {
   var start = false;
   var end = false;
@@ -75,6 +85,9 @@ function clickHandler(event) {
   }
 }
 
+// The click to add a wall node is in a different function
+// User has to keep Ctrl key pressed while clicking
+// Shift key to erase
 function wallHandler() {
   var key = null;
 
@@ -99,6 +112,8 @@ function wallHandler() {
   });
 }
 
+// Function that get the shortest path
+// Relying on the father vector
 function getPath(father) {
   var pathLength = 0;
   var path = [];
@@ -124,6 +139,16 @@ function getPath(father) {
   return path;
 }
 
+// Function that animate the path
+function animPath(path) {
+  for (let i = 0; i < path.length; i++) {
+    setTimeout(function () {
+      $(path[i]).removeClass("visited").addClass("active", 1000);
+    }, i * 20);
+  }
+}
+
+// Function that return the siblings vector of a node
 function getSiblings(node) {
   var parent = node.parent();
   var row = parent[0].rowIndex;
@@ -139,10 +164,10 @@ function getSiblings(node) {
   if (cell < table.rows[row].cells.length - 1)
     siblings.push(table.rows[row].cells[cell + 1]);
 
-  //console.log(siblings);
   return siblings;
 }
 
+// Breadth-first search algorithm
 function bfs() {
   var startNode = $(".startNode");
 
@@ -187,6 +212,8 @@ function bfs() {
   getRes(-1);
 }
 
+// Function that display the result
+// Plus the length of the path if there is one
 function getRes(res) {
   if (res === -1) {
     $("#res").css("color", "#c9111c");
@@ -197,15 +224,5 @@ function getRes(res) {
     $("#res").css("visibility", "visible");
 
     $("#res").html(`The shortest path is ${res} boxes`);
-  }
-}
-
-function animPath(path) {
-  for (let i = 0; i < path.length; i++) {
-    setTimeout(function () {
-      $(path[i])
-        .removeClass("visited")
-        .addClass("active", 1000, "easeOutBounce");
-    }, i * 20);
   }
 }
