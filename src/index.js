@@ -4,7 +4,8 @@
 
 $(document).ready(function () {
   createBoard();
-  $("table").click(function (event) {
+
+  $("td").click(function (event) {
     event.preventDefault();
 
     clickHandler(event);
@@ -25,10 +26,10 @@ $(document).ready(function () {
 // For the moment, no choice on the size
 function createBoard() {
   var id = 0;
-  for (let index = 0; index < 20; index++) {
+  for (let index = 0; index < 30; index++) {
     var row = $("<tr></tr>");
 
-    for (let j = 0; j < 30; j++) {
+    for (let j = 0; j < 50; j++) {
       var data = $(`<td id='${id}'></td>`);
       row.append(data);
       id++;
@@ -45,6 +46,8 @@ function clearBoard() {
   $(".endNode").removeClass("endNode");
   $(".active").removeClass("active");
   $(".wallNode").removeClass("wallNode");
+  $(".pass").removeClass("pass");
+  $(".hasAnim").removeClass("hasAnim");
   $("#res").css("visibility", "hidden");
 }
 
@@ -71,16 +74,16 @@ function clickHandler(event) {
   if (targetNode.hasClass("wallNode")) {
     targetNode.removeClass("wallNode").removeClass("visited");
   } else if (targetNode.hasClass("startNode")) {
-    targetNode.removeClass("startNode");
+    targetNode.removeClass("startNode").removeClass("hasAnim");
     start = false;
   } else if (targetNode.hasClass("endNode")) {
-    targetNode.removeClass("endNode");
+    targetNode.removeClass("endNode").removeClass("hasAnim");
     end = false;
   } else if (!targetNode.hasClass("startNode") && !start) {
-    targetNode.addClass("startNode");
+    animClass("startNode", targetNode);
     start = true;
   } else if (!targetNode.hasClass("startNode") && !end) {
-    targetNode.addClass("endNode");
+    animClass("endNode", targetNode);
     end = true;
   }
 }
@@ -91,16 +94,20 @@ function clickHandler(event) {
 function wallHandler() {
   var key = null;
 
-  $("table").mousemove(function (event) {
+  $("td").mousemove(function (event) {
     event.preventDefault();
     if (key === 17) {
       if (
         !$(event.target).hasClass("startNode") &&
         !$(event.target).hasClass("endNode")
       )
-        $(event.target).addClass("wallNode").addClass("visited");
+        $(event.target).addClass("pass");
+      animClass("wallNode", $(event.target));
     } else if (key === 16) {
-      $(event.target).removeClass("wallNode").removeClass("visited");
+      $(event.target)
+        .removeClass("wallNode")
+        .removeClass("visited")
+        .removeClass("hasAnim");
     }
   });
 
@@ -142,9 +149,32 @@ function getPath(father) {
 // Function that animate the path
 function animPath(path) {
   for (let i = 0; i < path.length; i++) {
-    setTimeout(function () {
-      $(path[i]).removeClass("visited").addClass("active", 1000);
-    }, i * 20);
+    setTimeout(
+      function () {
+        $(path[i]).removeClass("visited");
+        animClass("active", $(path[i]));
+        if (i === path.length - 1) {
+          getRes(finalPath.length);
+        }
+      },
+      i * 20,
+      i
+    );
+  }
+}
+
+function animTrace(visited, path) {
+  for (let i = 0; i < visited.length; i++) {
+    setTimeout(
+      function () {
+        animClass("visited", $(visited[i]));
+        if (i === visited.length - 1) {
+          animPath(path);
+        }
+      },
+      i * 10,
+      i
+    );
   }
 }
 
@@ -174,6 +204,7 @@ function bfs() {
   var curNode = startNode;
   var queue = [];
   var father = [];
+  var visited = [];
   let i = 0;
 
   queue.push(curNode);
@@ -184,25 +215,25 @@ function bfs() {
 
     var siblings = getSiblings($(s));
     for (let i = 0; i < siblings.length; i++) {
-      if (!$(siblings[i]).hasClass("visited")) {
+      if (!$(siblings[i]).hasClass("pass")) {
         if (
           !$(siblings[i]).hasClass("startNode") &&
           !$(siblings[i]).hasClass("endNode")
         ) {
-          $(siblings[i]).addClass("visited");
-
+          $(siblings[i]).addClass("pass");
+          visited.push($(siblings[i]));
           father[$(siblings[i]).attr("id")] = $(s).attr("id");
         }
         queue.push(siblings[i]);
         if ($(siblings[i]).hasClass("endNode")) {
           father[$(siblings[i]).attr("id")] = $(s).attr("id");
-          path = getPath(father);
-          console.log(path);
-          path.shift();
-          path.pop();
-          path.reverse();
-          animPath(path);
-          getRes(path.length);
+
+          finalPath = getPath(father);
+          finalPath.shift();
+          finalPath.pop();
+          finalPath.reverse();
+          //animPath(path);
+          animTrace(visited, finalPath);
 
           return;
         }
@@ -225,4 +256,12 @@ function getRes(res) {
 
     $("#res").html(`The shortest path is ${res} boxes`);
   }
+}
+
+function animClass(name, node) {
+  node.addClass(name).addClass("click");
+  node.addClass("hasAnim");
+  setTimeout(function () {
+    node.removeClass("click");
+  }, 200);
 }

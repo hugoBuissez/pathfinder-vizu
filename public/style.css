@@ -11,13 +11,6 @@ header {
   align-items: center;
 }
 
-td  {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
 #res {
   margin: 30px auto;
   font-size: 20px;
@@ -35,13 +28,27 @@ table {
 td {
   height: 30px;
   width: 30px;
-  border: 1px solid black;
+  border: 2px solid rgb(141, 141, 141);
   padding: 0;
+  margin: 12px 12px 12px 12px;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+}
+
+.click {
+  transform: scale(1.3);
 }
 
 hr {
   margin: 0 40px;
   width: 50%;
+}
+
+.test {
+  width: 100px;
+  height: 100px;
+  background-color: #0095ff;
+  display: none;
 }
 
 .startNode {
@@ -53,7 +60,7 @@ hr {
 }
 
 .wallNode {
-  background-color: #20272c !important;
+  background-color: #48535c !important;
 }
 
 .active {
