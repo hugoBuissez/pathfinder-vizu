@@ -1,34 +1,44 @@
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Syne", sans-serif;
 }
 
-header {
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+html,
+body {
+  margin: 0;
 }
 
 #res {
   margin: 30px auto;
-  font-size: 20px;
+  font-size: 16px;
+}
+
+header {
+  height: 10%;
+  background-color: #aed9e0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 15px;
+  justify-content: flex-start;
 }
 
 header > h1 {
-  text-align: center;
+  margin: 0;
+  font-size: 2em;
+  color: white;
 }
 
 table {
   border-collapse: collapse;
+  table-layout: fixed;
   margin: 20px auto;
 }
 
 td {
   height: 30px;
   width: 30px;
-  border: 2px solid rgb(141, 141, 141);
+  border: 2px solid #9e9e9e;
   padding: 0;
   margin: 12px 12px 12px 12px;
   transition: all 0.2s ease-in-out;
@@ -52,11 +62,11 @@ hr {
 }
 
 .startNode {
-  background-color: #77dd77;
+  background-color: #b8f2e6;
 }
 
 .endNode {
-  background-color: #c9111c;
+  background-color: #ffa69e;
 }
 
 .wallNode {
@@ -64,49 +74,53 @@ hr {
 }
 
 .active {
-  background-color: #0077cc;
+  background-color: #aed9e0;
 }
 
 .visited {
-  background-color: #ccc;
+  background-color: #faf3dd;
 }
 
-.bottom {
-  width: 100%;
+.buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .bout {
   border: none;
   border-radius: 5px;
-  padding: 15px 32px;
+  padding: 16px 22px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  width: 15%;
+  font-size: 20px;
+  width: 200px;
   cursor: pointer;
   margin-right: 10px;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 
 #btn {
-  background-color: #0095ff;
+  border: 1px solid #fff;
+  background-color: transparent;
   color: white;
 }
 
 #clearBtn {
-  color: #0095ff;
-  border: 1px solid white;
+  color: white;
+  border: 1px solid transparent;
+  background-color: transparent;
 }
 
 #clearBtn:hover {
-  border: 1px solid #0077cc;
+  color: #b8f2e6;
 }
 
 #btn:hover {
-  background-color: #0077cc;
+  border-color: #b8f2e6;
+  background-color: #b8f2e6;
   transition: 0.3s;
 }

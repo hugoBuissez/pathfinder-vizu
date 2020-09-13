@@ -29,7 +29,7 @@ function createBoard() {
   for (let index = 0; index < 30; index++) {
     var row = $("<tr></tr>");
 
-    for (let j = 0; j < 50; j++) {
+    for (let j = 0; j < 80; j++) {
       var data = $(`<td id='${id}'></td>`);
       row.append(data);
       id++;
@@ -107,7 +107,8 @@ function wallHandler() {
       $(event.target)
         .removeClass("wallNode")
         .removeClass("visited")
-        .removeClass("hasAnim");
+        .removeClass("hasAnim")
+        .removeClass("pass");
     }
   });
 
@@ -169,7 +170,9 @@ function animTrace(visited, path) {
       function () {
         animClass("visited", $(visited[i]));
         if (i === visited.length - 1) {
-          animPath(path);
+          setTimeout(() => {
+            animPath(path);
+          }, 500);
         }
       },
       i * 10,
