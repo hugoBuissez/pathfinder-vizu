@@ -30,7 +30,7 @@ $(document).ready(function () {
 // For the moment, no choice on the size
 function createBoard() {
   var id = 0;
-  for (let index = 0; index < 30; index++) {
+  for (let index = 0; index < 32; index++) {
     var row = $("<tr></tr>");
 
     for (let j = 0; j < 80; j++) {
@@ -49,8 +49,7 @@ function clearBoard(item) {
     $(".visited.pass").removeClass("visited pass hasAnim"); // Trace
     $(".visited").removeClass("visited"); // Safe line
     $(".pass.active").removeClass("active pass hasAnim"); // Path
-    $(".startNode").removeClass("startNode hasAnim"); // Start node
-    $(".endNode").removeClass("endNode hasAnim"); // End node
+
     $(".pass").removeClass("pass");
   } else if (item === "walls") {
     $(".wallNode").removeClass("wallNode hasAnim"); // Walls
@@ -89,6 +88,8 @@ function clickHandler(event) {
     end = false;
   } else if (!start && !targetNode.hasClass("startNode")) {
     animClass("startNode", targetNode);
+    targetNode.addClass("draggable");
+
     start = true;
   } else if (!end && !targetNode.hasClass("startNode")) {
     animClass("endNode", targetNode);
@@ -172,7 +173,7 @@ function animPath(path) {
 }
 
 function animTrace(visited, path) {
-  if (!$("#toggle1").is(":checked")) {
+  if (!$("#trace").is(":checked")) {
     for (let i = 0; i < visited.length; i++) {
       setTimeout(
         function () {
@@ -201,12 +202,37 @@ function getSiblings(node) {
 
   var siblings = [];
 
-  if (row > 0) siblings.push(table.rows[row - 1].cells[cell]);
-  if (row < table.rows.length - 1)
+  if (row > 0) {
+    siblings.push(table.rows[row - 1].cells[cell]);
+  }
+  if (row < table.rows.length - 1) {
     siblings.push(table.rows[row + 1].cells[cell]);
-  if (cell > 0) siblings.push(table.rows[row].cells[cell - 1]);
-  if (cell < table.rows[row].cells.length - 1)
+  }
+  if (cell > 0) {
+    siblings.push(table.rows[row].cells[cell - 1]);
+  }
+  if (cell < table.rows[row].cells.length - 1) {
     siblings.push(table.rows[row].cells[cell + 1]);
+  }
+
+  if (!$("#diag").is(":checked")) {
+    if (row > 0) {
+      if (cell > 0) {
+        siblings.push(table.rows[row - 1].cells[cell - 1]);
+      }
+      if (cell < table.rows[row].cells.length - 1) {
+        siblings.push(table.rows[row - 1].cells[cell + 1]);
+      }
+    }
+    if (row < table.rows.length - 1) {
+      if (cell > 0) {
+        siblings.push(table.rows[row + 1].cells[cell - 1]);
+      }
+      if (cell < table.rows[row].cells.length - 1) {
+        siblings.push(table.rows[row + 1].cells[cell + 1]);
+      }
+    }
+  }
 
   return siblings;
 }
