@@ -17,8 +17,18 @@ $(document).ready(function () {
     clearBoard("path");
   });
 
+  $("#closeBtn").click(function () {
+    $(".infos").slideUp(400);
+    $("#show").fadeIn(400);
+  });
+
   $("#clearWalls").click(function () {
     clearBoard("walls");
+  });
+
+  $("#show").click(function () {
+    $("#show").hide();
+    $(".infos").slideDown(400);
   });
 
   $("#btn").click(function () {
@@ -239,6 +249,8 @@ function getSiblings(node) {
 
 // Breadth-first search algorithm
 function bfs() {
+  var t0 = performance.now();
+
   $(".visited.pass").removeClass("visited pass hasAnim"); // Trace
   $(".visited").removeClass("visited"); // Safe line
   $(".pass.active").removeClass("active pass hasAnim"); // Path
@@ -279,6 +291,8 @@ function bfs() {
           finalPath.shift();
           finalPath.pop();
           finalPath.reverse();
+          var t1 = performance.now();
+          getTime(t1 - t0);
           animTrace(visited, finalPath);
 
           return;
@@ -286,22 +300,34 @@ function bfs() {
       }
     }
   }
+  var t1 = performance.now();
+  getTime(t1 - t0);
   getRes(-1);
 }
 
 // Function that display the result
 // Plus the length of the path if there is one
 function getRes(res) {
-  if (res === -1) {
-    $("#res").css("color", "#c9111c");
-    $("#res").css("visibility", "visible");
-    $("#res").html("No path for this configuration");
-  } else {
-    $("#res").css("color", "#0077cc");
-    $("#res").css("visibility", "visible");
+  var pathHTML = $("#pathLength");
 
-    $("#res").html(`The shortest path is ${res} boxes`);
+  if (res === -1) {
+    pathHTML.css("color", "#ffa69e");
+    pathHTML.css("visibility", "visible");
+    pathHTML.html("No path");
+  } else {
+    pathHTML.css("color", "#ffa69e");
+    pathHTML.css("visibility", "visible");
+
+    pathHTML.html(`${res}`);
   }
+}
+
+function getTime(time) {
+  var timeHTML = $("#execTime");
+
+  timeHTML.css("color", "#ffa69e");
+  timeHTML.css("visibility", "visible");
+  timeHTML.html(`${time} ms`);
 }
 
 function animClass(name, node) {

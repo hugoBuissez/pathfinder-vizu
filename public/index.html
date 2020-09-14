@@ -29,10 +29,10 @@
 
         <button id="btn" class="bout">Visualize</button>
 
-        <input id="trace" type="checkbox" checked />
+        <input id="trace" type="checkbox" />
         <label for="trace">Show trace</label>
 
-        <input id="diag" type="checkbox" checked />
+        <input id="diag" type="checkbox" />
         <label for="diag">Allow diagonal</label>
       </div>
     </header>
@@ -63,5 +63,49 @@
     <table id="myTable">
       <tbody></tbody>
     </table>
+
+    <footer>
+      <div class="infos">
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+          id="closeBtn"
+        >
+          <g fill="#707689" fill-rule="evenodd">
+            <polygon
+              transform="rotate(-45 10 10)"
+              points="8.99988613 3.92920709 10.9998861 3.92920709 11.0013974 16.0716466 9.00139741 16.0716466"
+            ></polygon>
+            <polygon
+              transform="scale(-1 1) rotate(-45 0 34.144)"
+              points="8.99988613 3.92920709 10.9998861 3.92920709 11.0013974 16.0716466 9.00139741 16.0716466"
+            ></polygon>
+          </g>
+        </svg>
+        <div class="marg"></div>
+        <p>
+          <b>First click</b> to place
+          <span style="color: #aed9e0">start node</span>
+        </p>
+        <p>
+          <b>Second click</b> to place
+          <span style="color: #ffa69e">destination</span>
+        </p>
+        <p><b>Ctrl+Mouse</b> to add walls</p>
+
+        <p><b>Shift+Mouse</b> erase walls</p>
+
+        <hr />
+
+        <p>Path length <span id="pathLength" class="hide"> </span></p>
+        <p>Execution time <span id="execTime" class="hide"> </span></p>
+      </div>
+
+      <div class="showInfos" id="show" style="display: none">
+        <img src="../assets/add.svg" alt="" />
+      </div>
+    </footer>
   </body>
 </html>

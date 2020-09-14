@@ -17,6 +17,11 @@ body {
   font-size: 16px;
 }
 
+.hide {
+  visibility: hidden;
+  font-size: 1.1em;
+}
+
 header {
   height: 6%;
   background-color: #aed9e0;
@@ -51,11 +56,6 @@ td {
 
 .click {
   transform: scale(1.2);
-}
-
-hr {
-  margin: 0 40px;
-  width: 50%;
 }
 
 .startNode {
@@ -195,4 +195,60 @@ input:checked + label {
 
 input:checked + label::before {
   background-color: #fff;
+}
+
+.infos {
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  background-color: #fff;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0.1rem 0.6rem #6a8494;
+  padding: 15px;
+  font-size: 1.3em;
+}
+
+.infos > p {
+  margin: 5px 0;
+}
+
+.infos > span {
+  margin: 0;
+}
+
+.infos > svg {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.infos > hr {
+  width: 100%;
+}
+
+.marg {
+  margin-bottom: 12px;
+}
+
+.showInfos {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  z-index: 99;
+}
+
+.showInfos img {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.showInfos img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
