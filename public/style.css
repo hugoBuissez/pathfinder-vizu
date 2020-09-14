@@ -4,7 +4,11 @@
 
 html,
 body {
-  margin: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 #res {
@@ -13,7 +17,7 @@ body {
 }
 
 header {
-  height: 10%;
+  height: 6%;
   background-color: #aed9e0;
   margin: 0;
   display: flex;
@@ -24,7 +28,7 @@ header {
 }
 
 header > h1 {
-  margin: 0;
+  margin: 0 10px 0 0;
   font-size: 2em;
   color: white;
 }
@@ -32,7 +36,6 @@ header > h1 {
 table {
   border-collapse: collapse;
   table-layout: fixed;
-  margin: 20px auto;
 }
 
 td {
@@ -54,15 +57,8 @@ hr {
   width: 50%;
 }
 
-.test {
-  width: 100px;
-  height: 100px;
-  background-color: #0095ff;
-  display: none;
-}
-
 .startNode {
-  background-color: #b8f2e6;
+  background-color: #aed9e0;
 }
 
 .endNode {
@@ -74,7 +70,7 @@ hr {
 }
 
 .active {
-  background-color: #aed9e0;
+  background-color: #b8f2e6;
 }
 
 .visited {
@@ -91,7 +87,7 @@ hr {
 .bout {
   border: none;
   border-radius: 5px;
-  padding: 16px 22px;
+  padding: 16px 18px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -109,18 +105,45 @@ hr {
   color: white;
 }
 
-#clearBtn {
+#clearPath,
+#clearWalls {
   color: white;
   border: 1px solid transparent;
   background-color: transparent;
 }
 
-#clearBtn:hover {
+#clearPath:hover,
+#clearWalls:hover {
   color: #b8f2e6;
+  transition: 0.3s;
 }
 
 #btn:hover {
   border-color: #b8f2e6;
   background-color: #b8f2e6;
   transition: 0.3s;
+}
+
+.legend {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.leg-cell {
+  height: 30px;
+  width: 30px;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 25px;
+  font-weight: lighter;
 }

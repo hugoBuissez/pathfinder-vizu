@@ -13,8 +13,12 @@ $(document).ready(function () {
 
   wallHandler();
 
-  $("#clearBtn").click(function () {
-    clearBoard();
+  $("#clearPath").click(function () {
+    clearBoard("path");
+  });
+
+  $("#clearWalls").click(function () {
+    clearBoard("walls");
   });
 
   $("#btn").click(function () {
@@ -40,15 +44,18 @@ function createBoard() {
 }
 
 // Reset the board
-function clearBoard() {
-  $(".visited").removeClass("visited");
-  $(".startNode").removeClass("startNode");
-  $(".endNode").removeClass("endNode");
-  $(".active").removeClass("active");
-  $(".wallNode").removeClass("wallNode");
-  $(".pass").removeClass("pass");
-  $(".hasAnim").removeClass("hasAnim");
-  $("#res").css("visibility", "hidden");
+function clearBoard(item) {
+  if (item === "path") {
+    $(".visited.pass").removeClass("visited pass hasAnim"); // Trace
+    $(".visited").removeClass("visited"); // Safe line
+    $(".pass.active").removeClass("active pass hasAnim"); // Path
+    $(".startNode").removeClass("startNode hasAnim"); // Start node
+    $(".endNode").removeClass("endNode hasAnim"); // End node
+  } else if (item === "walls") {
+    $(".pass.wallNode").removeClass("pass wallNode hasAnim"); // Walls
+  }
+
+  //$("#res").css("visibility", "hidden");
 }
 
 // Hook for the click event
@@ -79,10 +86,10 @@ function clickHandler(event) {
   } else if (targetNode.hasClass("endNode")) {
     targetNode.removeClass("endNode").removeClass("hasAnim");
     end = false;
-  } else if (!targetNode.hasClass("startNode") && !start) {
+  } else if (!start && !targetNode.hasClass("startNode")) {
     animClass("startNode", targetNode);
     start = true;
-  } else if (!targetNode.hasClass("startNode") && !end) {
+  } else if (!end && !targetNode.hasClass("startNode")) {
     animClass("endNode", targetNode);
     end = true;
   }
@@ -172,7 +179,7 @@ function animTrace(visited, path) {
         if (i === visited.length - 1) {
           setTimeout(() => {
             animPath(path);
-          }, 500);
+          }, 300);
         }
       },
       i * 10,
@@ -235,7 +242,6 @@ function bfs() {
           finalPath.shift();
           finalPath.pop();
           finalPath.reverse();
-          //animPath(path);
           animTrace(visited, finalPath);
 
           return;

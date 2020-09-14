@@ -24,11 +24,35 @@
     <header>
       <h1>Pathfiding Visualize</h1>
       <div class="buttons">
-        <button id="clearBtn" class="bout">Clear</button>
+        <button id="clearPath" class="bout">Clear path</button>
+        <button id="clearWalls" class="bout">Clear walls</button>
 
         <button id="btn" class="bout">Visualize</button>
       </div>
     </header>
+
+    <div class="legend">
+      <div class="leg-item">
+        <div class="leg-cell" style="background-color: #aed9e0"></div>
+        Start Node
+      </div>
+      <div class="leg-item">
+        <div class="leg-cell" style="background-color: #ffa69e"></div>
+        End Node
+      </div>
+      <div class="leg-item">
+        <div class="leg-cell wallNode" style="background-color: #48535c"></div>
+        Wall Node
+      </div>
+      <div class="leg-item">
+        <div class="leg-cell active" style="background-color: #b8f2e6"></div>
+        Path Node
+      </div>
+      <div class="leg-item">
+        <div class="leg-cell visited" style="background-color: #faf3dd"></div>
+        Visited Node
+      </div>
+    </div>
 
     <table id="myTable">
       <tbody></tbody>
