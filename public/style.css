@@ -9,6 +9,7 @@ body {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 #res {
@@ -66,7 +67,8 @@ hr {
 }
 
 .wallNode {
-  background-color: #48535c !important;
+  background-color: #48535c;
+  border-color: #48535c;
 }
 
 .active {
@@ -146,4 +148,59 @@ hr {
   font-size: 20px;
   margin-right: 25px;
   font-weight: lighter;
+}
+
+input {
+  position: absolute;
+  left: -9999px;
+}
+
+label {
+  display: block;
+  position: relative;
+  margin: 20px;
+  padding: 15px 30px 15px 62px;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  color: #fff;
+  background-color: #6a8494;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+label::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: 32px;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  transition: background-color 0.2s;
+}
+
+label:first-of-type {
+  transform: translateX(-40px);
+}
+
+label:last-of-type {
+  transform: translateX(40px);
+}
+
+label:hover,
+input:focus + label {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+input:checked + label {
+  background-color: #ffa69e;
+}
+
+input:checked + label::before {
+  background-color: #fff;
 }

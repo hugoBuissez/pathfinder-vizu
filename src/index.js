@@ -51,8 +51,9 @@ function clearBoard(item) {
     $(".pass.active").removeClass("active pass hasAnim"); // Path
     $(".startNode").removeClass("startNode hasAnim"); // Start node
     $(".endNode").removeClass("endNode hasAnim"); // End node
+    $(".pass").removeClass("pass");
   } else if (item === "walls") {
-    $(".pass.wallNode").removeClass("pass wallNode hasAnim"); // Walls
+    $(".wallNode").removeClass("wallNode hasAnim"); // Walls
   }
 
   //$("#res").css("visibility", "hidden");
@@ -108,8 +109,7 @@ function wallHandler() {
         !$(event.target).hasClass("startNode") &&
         !$(event.target).hasClass("endNode")
       )
-        $(event.target).addClass("pass");
-      animClass("wallNode", $(event.target));
+        animClass("wallNode", $(event.target));
     } else if (key === 16) {
       $(event.target)
         .removeClass("wallNode")
@@ -172,19 +172,23 @@ function animPath(path) {
 }
 
 function animTrace(visited, path) {
-  for (let i = 0; i < visited.length; i++) {
-    setTimeout(
-      function () {
-        animClass("visited", $(visited[i]));
-        if (i === visited.length - 1) {
-          setTimeout(() => {
-            animPath(path);
-          }, 300);
-        }
-      },
-      i * 10,
-      i
-    );
+  if (!$("#toggle1").is(":checked")) {
+    for (let i = 0; i < visited.length; i++) {
+      setTimeout(
+        function () {
+          animClass("visited", $(visited[i]));
+          if (i === visited.length - 1) {
+            setTimeout(() => {
+              animPath(path);
+            }, 300);
+          }
+        },
+        i * 10,
+        i
+      );
+    }
+  } else {
+    animPath(path);
   }
 }
 
@@ -209,8 +213,12 @@ function getSiblings(node) {
 
 // Breadth-first search algorithm
 function bfs() {
-  var startNode = $(".startNode");
+  $(".visited.pass").removeClass("visited pass hasAnim"); // Trace
+  $(".visited").removeClass("visited"); // Safe line
+  $(".pass.active").removeClass("active pass hasAnim"); // Path
+  $(".pass").removeClass("pass");
 
+  var startNode = $(".startNode");
   var curNode = startNode;
   var queue = [];
   var father = [];
@@ -225,7 +233,10 @@ function bfs() {
 
     var siblings = getSiblings($(s));
     for (let i = 0; i < siblings.length; i++) {
-      if (!$(siblings[i]).hasClass("pass")) {
+      if (
+        !$(siblings[i]).hasClass("pass") &&
+        !$(siblings[i]).hasClass("wallNode")
+      ) {
         if (
           !$(siblings[i]).hasClass("startNode") &&
           !$(siblings[i]).hasClass("endNode")
