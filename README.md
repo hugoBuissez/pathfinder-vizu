@@ -1,2 +1,2 @@
 # pathfinder-vizu
-Pathfinder visualisation in JS. ONly BFS algorithm
+Pathfinder visualisation in JS. Only BFS algorithm
