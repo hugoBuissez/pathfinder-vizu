@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PathfidingVisual</title>
+    <title>Pathfiding Visualize</title>
   </head>
 
   <meta charset="UTF-8" />
@@ -24,17 +24,28 @@
     <header>
       <h1>Pathfiding Visualize</h1>
       <div class="buttons">
-        <button id="clearPath" class="bout">Clear path</button>
-        <button id="clearWalls" class="bout">Clear walls</button>
+        <input id="clearWalls" type="button" />
+        <label for="clearWalls" class="topBout">Clear walls</label>
 
-        <button id="btn" class="bout">Visualize</button>
+        <input id="clearPath" type="button" />
+        <label for="clearPath" class="topBout">Clear path</label>
 
         <input id="trace" type="checkbox" />
-        <label for="trace">Show trace</label>
+        <label for="trace" class="box">Show trace</label>
 
         <input id="diag" type="checkbox" />
-        <label for="diag">Allow diagonal</label>
+        <label for="diag" class="box">Allow diagonal</label>
+
+        <input id="btn" type="button" />
+        <label for="btn" class="topBout">visualize</label>
       </div>
+      <a
+        href="https://github.com/hugoBuissez/pathfinder-vizu"
+        target="_blank"
+        class="gitLogo"
+      >
+        <img src="../assets/github.svg" alt="" class=""
+      /></a>
     </header>
 
     <div class="legend">

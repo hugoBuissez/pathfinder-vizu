@@ -12,6 +12,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+button:active,
+.topBout:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
 #res {
   margin: 30px auto;
   font-size: 16px;
@@ -101,10 +109,14 @@ td {
   font-weight: bolder;
 }
 
-#btn {
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: white;
+label[for="btn"] {
+  text-transform: uppercase;
+  font-weight: bolder;
+  transition: all 0.2s ease-in-out;
+}
+
+label[for="btn"]:hover {
+  background-color: #c1c1c1;
 }
 
 #clearPath,
@@ -159,7 +171,6 @@ label {
   display: block;
   position: relative;
   margin: 20px;
-  padding: 15px 30px 15px 62px;
   border: 3px solid #fff;
   border-radius: 100px;
   color: #fff;
@@ -171,7 +182,15 @@ label {
   transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-label::before {
+.box {
+  padding: 15px 30px 15px 62px;
+}
+
+.topBout {
+  padding: 15px 30px 15px 30px;
+}
+
+.box::before {
   content: "";
   display: block;
   position: absolute;
@@ -187,6 +206,10 @@ label::before {
 label:hover,
 input:focus + label {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.topBout:hover {
+  background-color: #ffa69e;
 }
 
 input:checked + label {
@@ -229,15 +252,24 @@ input:checked + label::before {
   width: 100%;
 }
 
-.marg {
-  margin-bottom: 12px;
-}
-
 .showInfos {
   position: absolute;
   bottom: 50px;
   right: 50px;
   z-index: 99;
+}
+
+.gitLogo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 2%;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.gitLogo:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 .showInfos img {
