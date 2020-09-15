@@ -212,12 +212,8 @@ input:focus + label {
   background-color: #ffa69e;
 }
 
-input:checked + label {
-  background-color: #ffa69e;
-}
-
 input:checked + label::before {
-  background-color: #fff;
+  background-color: #ffa69e;
 }
 
 .infos {

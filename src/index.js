@@ -183,7 +183,7 @@ function animPath(path) {
 }
 
 function animTrace(visited, path) {
-  if (!$("#trace").is(":checked")) {
+  if ($("#trace").is(":checked")) {
     for (let i = 0; i < visited.length; i++) {
       setTimeout(
         function () {
@@ -225,7 +225,7 @@ function getSiblings(node) {
     siblings.push(table.rows[row].cells[cell + 1]);
   }
 
-  if (!$("#diag").is(":checked")) {
+  if ($("#diag").is(":checked")) {
     if (row > 0) {
       if (cell > 0) {
         siblings.push(table.rows[row - 1].cells[cell - 1]);
