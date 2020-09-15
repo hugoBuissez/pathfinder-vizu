@@ -188,7 +188,7 @@ function animTrace(visited, path) {
       setTimeout(
         function () {
           animClass("visited", $(visited[i]));
-          if (i === visited.length - 1) {
+          if (i === visited.length - 1 && path != []) {
             setTimeout(() => {
               animPath(path);
             }, 300);
@@ -300,6 +300,7 @@ function bfs() {
       }
     }
   }
+  animTrace(visited, []);
   var t1 = performance.now();
   getTime(t1 - t0);
   getRes(-1);
